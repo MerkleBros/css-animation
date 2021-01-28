@@ -5,118 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Generative comic book color schemes</title>
-  <style>
-    html {
-    }
-    body {
-      background: #24aecd;
-      padding: 1vh;
-      height: 90vh;
-      width: 90vw;
-      caret-color: transparent;
-      animation: bgrandom 20s steps(20) infinite;
-    }
-    .text {
-      width: 80vw;
-      height: 10vh;
-      min-width: 80vw;
-      min-height: 10vh;
-      text-align: center;
-      padding: 4vw;
-      margin: 4vh;
-      border: 5px solid rgba(201,0,76,0.7);
-      background-color: rgba(255, 220, 100, 0.3);
-      color: white;
-      font-size: 2em;
-    }
-
-    .monster {
-      width: 30px;
-      height: 30px;
-      margin: 5% auto;
-      background: url('./cropped-idle.png') left center;
-      animation: bounce 1s steps(4) infinite;
-    }
-
-    @keyframes bounce {
-      0% {
-        background-position: 0px 30px;
-        transform: scale(400%);
-      }
-      100% {
-        background-position: 0px -115px;
-        transform: scale(400%);
-      }
-    }
-    .monster-container {
-      width: 40vw;
-      height: 1em;
-      padding: 1em;
-      animation: run 5s;
-      animation-fill-mode: forwards;
-    }
-    @keyframes run {
-      0% {
-        translate: -100%;
-      }
-      100% {
-        translate: 40%;
-      }
-    }
-    .dog {
-      width: 32px;
-      height: 32px;
-      margin: 5% auto;
-      background: url('./dog-sprite.png') left center;
-      animation: blink 7s steps(2) infinite;
-    }
-
-    .dog-container {
-      width: 40vw;
-      height: 1em;
-      padding: 1em;
-      animation: dog-run 5s;
-      animation-fill-mode: forwards;
-    }
-    @keyframes blink {
-      0% {
-        background-position: 0px 32px;
-        transform: scale(400%);
-      }
-      100% {
-        background-position: 0px 96px;
-        transform: scale(400%);
-      }
-      0% {
-        background-position: 0px 32px;
-        transform: scale(400%);
-      }
-    }
-    @keyframes dog-run {
-      0% {
-        translate: 400%;
-      }
-      100% {
-        translate: 80%;
-      }
-    }
-    @keyframes bgrandom {
-      0% {
-        background-color: #cd246b;
-      }
-      100% {
-        background-color: #ba66e0;
-      }
-      0% {
-        background-color: #cd246b;
-      }
-
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div class="text">test</div>
+  <div class="message-div"><h1 id="message"></h1></div>
     <div style="display: inline-block">
       <div class="monster-container">
         <div class="monster"></div>
@@ -125,6 +18,7 @@
         <div class="dog"></div>
       </div>
     </div>
+  <script src="script.js"></script>
 </body>
 
 </html>
