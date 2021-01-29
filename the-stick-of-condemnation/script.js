@@ -68,7 +68,7 @@ const messages = [
   { speaker: me, message: "Does this stick fit your mouth?" },
   {
     speaker: dog,
-    message: "It bends in the wrong ways and has points all over it.",
+    message: "No. It bends in the wrong ways and has points all over it.",
   },
   { speaker: me, message: "Not all sticks fit all mouths." },
   { speaker: dog, message: "But we've made things fit." },
@@ -92,7 +92,11 @@ const messages = [
   {
     speaker: me,
     message:
-      "The stick of condemnation must not be treated as some literary allusion. Take things at face value, my beast.",
+      "The stick of condemnation must not be treated as some literary allusion.",
+  },
+  {
+    speaker: me,
+    message: "Take things at face value, my beast.",
   },
   { speaker: me, message: "She's given you a cursed stick." },
   { speaker: dog, message: "I hate her and I hate the stick of condemnation!" },
@@ -113,16 +117,17 @@ const messages = [
     message: "Isn't that what you've been afraid of all along?",
     delay: 5,
   },
-  { speaker: dog, message: "..." },
+  { speaker: dog, message: "...", delay: 5 },
   {
     speaker: narrator,
     message: "Sometimes a dog musters the courage to drop a cursed stick",
+    delay: 5,
   },
   { speaker: me, message: "You've done good, boy. You're a good boy." },
   { speaker: dog, message: "I didn't know that I needed to drop the stick." },
   { speaker: me, message: "You needed outside counsel." },
-  { speaker: dog, message: "I needed a friend." },
-  { speaker: me, message: "You've found one now. Let's go." },
+  { speaker: dog, message: "I needed a friend.", delay: 5 },
+  { speaker: me, message: "You've found one now. Let's go.", delay: 5 },
 ];
 
 let index = 0;
@@ -134,7 +139,15 @@ const monsterContainerDiv = document.getElementsByClassName(
   "monster-container"
 )[0];
 
-h1.addEventListener("animationend", (e) => {
+function getReadingTime(str) {
+  /* Return an estimated reading time in seconds for a string
+   * Assuming a 180 words per minute reading speed and 5 chars per word*/
+  const wordsPerSecond = 180 / 60;
+  const charsPerWord = 5;
+  return str.length / charsPerWord / wordsPerSecond;
+}
+
+h1.addEventListener("animationend", () => {
   if (index >= messages.length) {
     document.body.style.animation = "bg-fade 7s forwards ease-in";
     monsterDiv.style.animation = "none";
@@ -142,14 +155,20 @@ h1.addEventListener("animationend", (e) => {
     return;
   }
 
-  h1.classList.remove("playing");
+  h1.classList.forEach((str) => {
+    if (str.includes("playing")) {
+      h1.classList.remove(str);
+    }
+  });
+
   h1.innerHTML = "";
   void h1.offsetWidth; //makes DOM update and repaint work right
 
   const message = messages[index].message;
   const speaker = messages[index].speaker;
+  const delay = messages[index].delay;
 
-  if (speaker === "Me") {
+  if (speaker === me) {
     monsterContainerDiv.style.opacity = 1;
     dogContainerDiv.style.opacity = 0.7;
   } else {
@@ -161,9 +180,21 @@ h1.addEventListener("animationend", (e) => {
   ) {
     dogDiv.style.animation = "none";
   }
+
   h1.innerHTML = `${speaker}: ${message}`;
-  h1.classList.add("playing");
+
+  let readTime = Math.round(getReadingTime(message));
+  if (delay !== undefined) {
+    readTime += delay;
+  }
+
+  if (readTime <= 3) {
+    h1.classList.add("playing-5s");
+  } else {
+    h1.classList.add("playing-7s");
+  }
+
   index++;
 });
 
-h1.classList.add("playing");
+h1.classList.add("playing-7s");

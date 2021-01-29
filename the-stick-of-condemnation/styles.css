@@ -117,9 +117,10 @@ body {
   letter-spacing: .10em;
   font-size: 2vw;
 }
-.playing {
-  animation:
-  play 8s steps(1, end)
+.playing-5s {
+  animation: play 5s steps(1, end)
 }
-
+.playing-7s {
+  animation: play 7s steps(1, end)
+}
 @keyframes play {}
