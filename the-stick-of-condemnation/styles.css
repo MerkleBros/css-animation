@@ -1,10 +1,21 @@
+html {
+  width: 100vw;
+}
 body {
   background: #24aecd;
-  padding: 1vh;
+  padding: 1vw;
   height: 90vh;
-  width: 90vw;
+  width: 100vw;
   caret-color: transparent;
   animation: bgrandom 20s steps(20) alternate infinite;
+}
+@keyframes bg-fade {
+  100% {
+    background: black;
+    color: white;
+    opacity: 1;
+    filter: brightness(1200%);
+  }
 }
 .message-div {
   width: 80vw;
@@ -17,7 +28,7 @@ body {
   border: 5px solid rgba(201,0,76,0.7);
   background-color: rgba(255, 220, 100, 0.3);
   color: white;
-  font-size: 2em;
+  font-size: 3em;
   opacity: 0.6;
 }
 .monster-container, .dog-container {
@@ -30,16 +41,15 @@ body {
   margin: 5% auto;
   background: url('./cropped-idle.png') left center;
   animation: bounce 1s steps(4) infinite;
+  transform: scale(400%);
 }
 
 @keyframes bounce {
   0% {
     background-position: 0px 30px;
-    transform: scale(400%);
   }
   100% {
     background-position: 0px -115px;
-    transform: scale(400%);
   }
 }
 .monster-container {
@@ -63,6 +73,8 @@ body {
   margin: 5% auto;
   background: url('./dog-sprite.png') left center;
   animation: blink 7s steps(2) infinite;
+  background-position: 0px 0px;
+  transform: scale(400%);
 }
 
 .dog-container {
@@ -75,15 +87,12 @@ body {
 @keyframes blink {
   0% {
     background-position: 0px 32px;
-    transform: scale(400%);
   }
   100% {
     background-position: 0px 96px;
-    transform: scale(400%);
   }
   0% {
     background-position: 0px 32px;
-    transform: scale(400%);
   }
 }
 @keyframes dog-run {
@@ -108,12 +117,9 @@ body {
   letter-spacing: .10em;
   font-size: 2vw;
 }
-.typing {
+.playing {
   animation:
-  typing 8s steps(1, end)
+  play 8s steps(1, end)
 }
 
-@keyframes typing {
-  from { width: 100% }
-  to { width: 100% }
-}
+@keyframes play {}

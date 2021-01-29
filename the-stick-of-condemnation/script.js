@@ -126,29 +126,44 @@ const messages = [
 ];
 
 let index = 0;
-const element = document.getElementById("message");
-element.addEventListener("animationend", (e) => {
+const h1 = document.getElementById("message");
+const dogDiv = document.getElementsByClassName("dog")[0];
+const dogContainerDiv = document.getElementsByClassName("dog-container")[0];
+const monsterDiv = document.getElementsByClassName("monster")[0];
+const monsterContainerDiv = document.getElementsByClassName(
+  "monster-container"
+)[0];
+
+h1.addEventListener("animationend", (e) => {
   if (index >= messages.length) {
+    document.body.style.animation = "bg-fade 7s forwards ease-in";
+    monsterDiv.style.animation = "none";
+    h1.innerHTML = "END: THE STICK OF CONDEMNATION";
     return;
   }
 
-  element.classList.remove("typing");
-  element.innerHTML = "";
-  void element.offsetWidth;
+  h1.classList.remove("playing");
+  h1.innerHTML = "";
+  void h1.offsetWidth; //makes DOM update and repaint work right
 
   const message = messages[index].message;
   const speaker = messages[index].speaker;
 
   if (speaker === "Me") {
-    document.getElementsByClassName("monster-container")[0].style.opacity = 1;
-    document.getElementsByClassName("dog-container")[0].style.opacity = 0.7;
+    monsterContainerDiv.style.opacity = 1;
+    dogContainerDiv.style.opacity = 0.7;
   } else {
-    document.getElementsByClassName("monster-container")[0].style.opacity = 0.7;
-    document.getElementsByClassName("dog-container")[0].style.opacity = 1;
+    monsterContainerDiv.style.opacity = 0.7;
+    dogContainerDiv.style.opacity = 1;
   }
-
-  element.innerHTML = `${speaker}: ${message}`;
-  element.classList.add("typing");
+  if (
+    message === "Sometimes a dog musters the courage to drop a cursed stick"
+  ) {
+    dogDiv.style.animation = "none";
+  }
+  h1.innerHTML = `${speaker}: ${message}`;
+  h1.classList.add("playing");
   index++;
 });
-element.classList.add("typing");
+
+h1.classList.add("playing");
